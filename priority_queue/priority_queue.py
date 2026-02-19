@@ -11,8 +11,7 @@ class MinHeap:
     def peek(self):
         if not self.data:
             return None
-            priority, item = self.data[0]
-        return (item, priority)
+        return self.data[0]
      
 
     def add(self, priority, item):
@@ -24,10 +23,10 @@ class MinHeap:
             return None
 
         self.data[0], self.data[-1]=self.data[-1], self.data[0]
-        priority, item = self.data.pop()
+        min_item = self.data.pop()
         if self.data:
             self._bubble_down(0)
-        return (item, priority)
+        return (min_item)
 
     def _bubble_up(self, idx):
         while idx > 0:
@@ -47,15 +46,15 @@ class MinHeap:
             smallest=idx
 
             if left < n and self.data[left][0]< self.data[smallest][0]:
-            smallest = left
+                smallest = left
             if right < n and self.data[right][0]< self.data[smallest][0]:
-            smallest=right
+                smallest=right
 
             if smallest == idx:
                 break
             self.data[idx], self.data[smallest]= self.data[smallest], self.data[idx]
             idx = smallest
-
+            
 class PriorityQueue:
     def __init__(self):
         self.heap = MinHeap()
